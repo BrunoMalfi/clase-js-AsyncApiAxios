@@ -53,11 +53,13 @@ axios.get(API_URL2+"/shiba/images")
 
 const showFotoPerrito = (event)=>{
     console.log('Event', event.target.childNodes[0].data)
+    event.target.setAttribute("class","col col-2 btn btn-sm btn-warning m-1")
+
     const perrito=event.target.childNodes[0].data
     axios.get(API_URL2+"/"+perrito+"/images")
          .then((res) =>{
             perritosDivImg.innerHTML=""
-            console.log('Perrito sandom imagenes  : ', res.data.message)
+            console.log('Perrito imagenes  : ', res.data.message)
             res.data.message.map((img)=>{
                  const imgTag = document.createElement("img");
                  imgTag.setAttribute("src",img)
@@ -72,6 +74,7 @@ const showFotoPerrito = (event)=>{
 
 const showPerrito = ()=>{
     perritosDiv.innerHTML=""
+    perritosDivImg.innerHTML=""
     axios.get(API_URL2+"s/list/all")
     .then((res) =>{ 
         // console.log('Extra .showPerrito : ', Object.keys(res.data.message))
@@ -96,6 +99,8 @@ const showPerrito = ()=>{
             const btn = document.createElement("button");
             const node0 = document.createTextNode(perrito);
             btn.setAttribute("type","button")
+            //class="col col-3 btn btn-primary
+            btn.setAttribute("class","col col-2 btn btn-sm btn-primary m-1")
             btn.appendChild(node0);
             perritosDiv.appendChild(btn)
             btn.addEventListener('click',showFotoPerrito)
